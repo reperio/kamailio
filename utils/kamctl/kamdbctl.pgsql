@@ -129,14 +129,14 @@ if [ $? -ne 0 ] ; then
 fi
 
 
-sql_query "$1" "CREATE FUNCTION "concat" (text,text) RETURNS text AS 'SELECT \$1 || \$2;' LANGUAGE 'sql';
-	        CREATE FUNCTION "rand" () RETURNS double precision AS 'SELECT random();' LANGUAGE 'sql';"
+#sql_query "$1" "CREATE FUNCTION "concat" (text,text) RETURNS text AS 'SELECT \$1 || \$2;' LANGUAGE 'sql';
+#	        CREATE FUNCTION "rand" () RETURNS double precision AS 'SELECT random();' LANGUAGE 'sql';"
 # emulate mysql proprietary functions used by the lcr module in postgresql
 
-if [ $? -ne 0 ] ; then
-	merr "Creating mysql emulation functions failed!"
-	exit 1
-fi
+#if [ $? -ne 0 ] ; then
+#	merr "Creating mysql emulation functions failed!"
+#	exit 1
+#fi
 
 for TABLE in $STANDARD_MODULES; do
     mdbg "Creating core table: $TABLE"
@@ -154,7 +154,7 @@ if [ $? -ne 0 ] ; then
 fi
 
 for TABLE in $STANDARD_TABLES; do
-	sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE $TABLE TO $DBRWUSER;"
+	sql_query "$1" "GRANT ALL ON TABLE $TABLE TO $DBRWUSER;"
 	sql_query "$1" "GRANT SELECT ON TABLE $TABLE TO $DBROUSER;"
 
 	if [ $? -ne 0 ] ; then
@@ -211,7 +211,7 @@ if [ $? -ne 0 ] ; then
 fi
 
 for TABLE in $PRESENCE_TABLES; do
-	sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE $TABLE TO $DBRWUSER;"
+	sql_query "$1" "GRANT ALL ON TABLE $TABLE TO $DBRWUSER;"
 	sql_query "$1" "GRANT SELECT ON TABLE $TABLE TO $DBROUSER;"
 done
 
@@ -238,7 +238,7 @@ for TABLE in $EXTRA_MODULES; do
 done
 
 for TABLE in $EXTRA_TABLES; do
-	sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE $TABLE TO $DBRWUSER;"
+	sql_query "$1" "GRANT ALL ON TABLE $TABLE TO $DBRWUSER;"
 	sql_query "$1" "GRANT SELECT ON TABLE $TABLE TO $DBROUSER;"
 	if [ $? -ne 0 ] ; then
 		merr "Grant privileges to extra tables failed!"
