@@ -1,5 +1,5 @@
 CREATE TABLE matrix (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     first INTEGER NOT NULL,
     second SMALLINT NOT NULL,
     res INTEGER NOT NULL

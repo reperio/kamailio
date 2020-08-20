@@ -1,5 +1,5 @@
 CREATE TABLE mohqcalls (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     mohq_id INTEGER NOT NULL,
     call_id VARCHAR(100) NOT NULL,
     call_status INTEGER NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE mohqcalls (
 INSERT INTO version (table_name, table_version) values ('mohqcalls','1');
 
 CREATE TABLE mohqueues (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     name VARCHAR(25) NOT NULL,
     uri VARCHAR(100) NOT NULL,
     mohdir VARCHAR(100),

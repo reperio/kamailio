@@ -1,5 +1,5 @@
 CREATE TABLE rls_presentity (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     rlsubs_did VARCHAR(255) NOT NULL,
     resource_uri VARCHAR(255) NOT NULL,
     content_type VARCHAR(255) NOT NULL,
@@ -18,7 +18,7 @@ CREATE INDEX rls_presentity_expires_idx ON rls_presentity (expires);
 INSERT INTO version (table_name, table_version) values ('rls_presentity','1');
 
 CREATE TABLE rls_watchers (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     presentity_uri VARCHAR(255) NOT NULL,
     to_user VARCHAR(64) NOT NULL,
     to_domain VARCHAR(64) NOT NULL,

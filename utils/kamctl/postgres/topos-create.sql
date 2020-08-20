@@ -1,5 +1,5 @@
 CREATE TABLE topos_d (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     rectime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     s_method VARCHAR(64) DEFAULT '' NOT NULL,
     s_cseq VARCHAR(64) DEFAULT '' NOT NULL,
@@ -33,7 +33,7 @@ CREATE INDEX topos_d_b_uuid_idx ON topos_d (b_uuid);
 INSERT INTO version (table_name, table_version) values ('topos_d','1');
 
 CREATE TABLE topos_t (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     rectime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     s_method VARCHAR(64) DEFAULT '' NOT NULL,
     s_cseq VARCHAR(64) DEFAULT '' NOT NULL,

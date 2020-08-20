@@ -1,5 +1,5 @@
 CREATE TABLE mtree (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     tprefix VARCHAR(32) DEFAULT '' NOT NULL,
     tvalue VARCHAR(128) DEFAULT '' NOT NULL,
     CONSTRAINT mtree_tprefix_idx UNIQUE (tprefix)
@@ -8,7 +8,7 @@ CREATE TABLE mtree (
 INSERT INTO version (table_name, table_version) values ('mtree','1');
 
 CREATE TABLE mtrees (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     tname VARCHAR(128) DEFAULT '' NOT NULL,
     tprefix VARCHAR(32) DEFAULT '' NOT NULL,
     tvalue VARCHAR(128) DEFAULT '' NOT NULL,

@@ -1,5 +1,5 @@
 CREATE TABLE uid_credentials (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     auth_username VARCHAR(64) NOT NULL,
     did VARCHAR(64) DEFAULT '_default' NOT NULL,
     realm VARCHAR(64) NOT NULL,

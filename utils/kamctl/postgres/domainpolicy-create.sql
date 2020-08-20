@@ -1,5 +1,5 @@
 CREATE TABLE domainpolicy (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     rule VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     att VARCHAR(255),

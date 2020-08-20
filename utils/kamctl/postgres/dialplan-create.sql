@@ -1,5 +1,5 @@
 CREATE TABLE dialplan (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     dpid INTEGER NOT NULL,
     pr INTEGER NOT NULL,
     match_op INTEGER NOT NULL,

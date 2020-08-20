@@ -1,5 +1,5 @@
 CREATE TABLE location (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     ruid VARCHAR(64) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE INDEX location_connection_idx ON location (server_id, connection_id);
 INSERT INTO version (table_name, table_version) values ('location','9');
 
 CREATE TABLE location_attrs (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     ruid VARCHAR(64) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT NULL,

@@ -1,5 +1,5 @@
 CREATE TABLE dialog (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     hash_entry INTEGER NOT NULL,
     hash_id INTEGER NOT NULL,
     callid VARCHAR(255) NOT NULL,
@@ -30,7 +30,7 @@ CREATE INDEX dialog_hash_idx ON dialog (hash_entry, hash_id);
 INSERT INTO version (table_name, table_version) values ('dialog','7');
 
 CREATE TABLE dialog_vars (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     hash_entry INTEGER NOT NULL,
     hash_id INTEGER NOT NULL,
     dialog_key VARCHAR(128) NOT NULL,

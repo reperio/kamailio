@@ -1,5 +1,5 @@
 CREATE TABLE silo (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     src_addr VARCHAR(255) DEFAULT '' NOT NULL,
     dst_addr VARCHAR(255) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,

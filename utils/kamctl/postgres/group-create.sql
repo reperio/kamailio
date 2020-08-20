@@ -1,5 +1,5 @@
 CREATE TABLE grp (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT '' NOT NULL,
     grp VARCHAR(64) DEFAULT '' NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE grp (
 INSERT INTO version (table_name, table_version) values ('grp','2');
 
 CREATE TABLE re_grp (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     reg_exp VARCHAR(128) DEFAULT '' NOT NULL,
     group_id INTEGER DEFAULT 0 NOT NULL
 );

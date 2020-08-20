@@ -1,5 +1,5 @@
 CREATE TABLE presentity (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     event VARCHAR(64) NOT NULL,
@@ -20,7 +20,7 @@ CREATE INDEX presentity_account_idx ON presentity (username, domain, event);
 INSERT INTO version (table_name, table_version) values ('presentity','5');
 
 CREATE TABLE active_watchers (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     presentity_uri VARCHAR(255) NOT NULL,
     watcher_username VARCHAR(64) NOT NULL,
     watcher_domain VARCHAR(64) NOT NULL,
@@ -58,7 +58,7 @@ CREATE INDEX active_watchers_updated_winfo_idx ON active_watchers (updated_winfo
 INSERT INTO version (table_name, table_version) values ('active_watchers','12');
 
 CREATE TABLE watchers (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     presentity_uri VARCHAR(255) NOT NULL,
     watcher_username VARCHAR(64) NOT NULL,
     watcher_domain VARCHAR(64) NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE watchers (
 INSERT INTO version (table_name, table_version) values ('watchers','3');
 
 CREATE TABLE xcap (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     doc BYTEA NOT NULL,
@@ -91,7 +91,7 @@ CREATE INDEX xcap_account_doc_uri_idx ON xcap (username, domain, doc_uri);
 INSERT INTO version (table_name, table_version) values ('xcap','4');
 
 CREATE TABLE pua (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     pres_uri VARCHAR(255) NOT NULL,
     pres_id VARCHAR(255) NOT NULL,
     event INTEGER NOT NULL,

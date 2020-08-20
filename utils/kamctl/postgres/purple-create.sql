@@ -1,5 +1,5 @@
 CREATE TABLE purplemap (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     sip_user VARCHAR(255) NOT NULL,
     ext_user VARCHAR(255) NOT NULL,
     ext_prot VARCHAR(16) NOT NULL,

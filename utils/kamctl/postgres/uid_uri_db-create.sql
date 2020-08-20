@@ -1,5 +1,5 @@
 CREATE TABLE uid_uri (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     uid VARCHAR(64) NOT NULL,
     did VARCHAR(64) NOT NULL,
     username VARCHAR(64) NOT NULL,
@@ -13,7 +13,7 @@ CREATE INDEX uid_uri_uri_uid ON uid_uri (uid);
 INSERT INTO version (table_name, table_version) values ('uid_uri','3');
 
 CREATE TABLE uid_uri_attrs (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     username VARCHAR(64) NOT NULL,
     did VARCHAR(64) NOT NULL,
     name VARCHAR(32) NOT NULL,

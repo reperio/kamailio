@@ -1,5 +1,5 @@
 CREATE TABLE lcr_gw (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     lcr_id SMALLINT NOT NULL,
     gw_name VARCHAR(128),
     ip_addr VARCHAR(50),
@@ -20,7 +20,7 @@ CREATE INDEX lcr_gw_lcr_id_idx ON lcr_gw (lcr_id);
 INSERT INTO version (table_name, table_version) values ('lcr_gw','3');
 
 CREATE TABLE lcr_rule_target (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     lcr_id SMALLINT NOT NULL,
     rule_id INTEGER NOT NULL,
     gw_id INTEGER NOT NULL,
@@ -34,7 +34,7 @@ CREATE INDEX lcr_rule_target_lcr_id_idx ON lcr_rule_target (lcr_id);
 INSERT INTO version (table_name, table_version) values ('lcr_rule_target','1');
 
 CREATE TABLE lcr_rule (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     lcr_id SMALLINT NOT NULL,
     prefix VARCHAR(16) DEFAULT NULL,
     from_uri VARCHAR(64) DEFAULT NULL,

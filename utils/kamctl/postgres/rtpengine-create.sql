@@ -1,5 +1,5 @@
 CREATE TABLE rtpengine (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     setid INTEGER DEFAULT 0 NOT NULL,
     url VARCHAR(64) NOT NULL,
     weight INTEGER DEFAULT 1 NOT NULL,

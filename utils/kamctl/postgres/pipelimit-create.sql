@@ -1,5 +1,5 @@
 CREATE TABLE pl_pipes (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     pipeid VARCHAR(64) DEFAULT '' NOT NULL,
     algorithm VARCHAR(32) DEFAULT '' NOT NULL,
     plimit INTEGER DEFAULT 0 NOT NULL

@@ -1,5 +1,5 @@
 CREATE TABLE sca_subscriptions (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     subscriber VARCHAR(255) NOT NULL,
     aor VARCHAR(255) NOT NULL,
     event INTEGER DEFAULT 0 NOT NULL,

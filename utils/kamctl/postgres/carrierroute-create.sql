@@ -1,5 +1,5 @@
 CREATE TABLE carrierroute (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     carrier INTEGER DEFAULT 0 NOT NULL,
     domain INTEGER DEFAULT 0 NOT NULL,
     scan_prefix VARCHAR(64) DEFAULT '' NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE carrierroute (
 INSERT INTO version (table_name, table_version) values ('carrierroute','3');
 
 CREATE TABLE carrierfailureroute (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     carrier INTEGER DEFAULT 0 NOT NULL,
     domain INTEGER DEFAULT 0 NOT NULL,
     scan_prefix VARCHAR(64) DEFAULT '' NOT NULL,
@@ -31,14 +31,14 @@ CREATE TABLE carrierfailureroute (
 INSERT INTO version (table_name, table_version) values ('carrierfailureroute','2');
 
 CREATE TABLE carrier_name (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     carrier VARCHAR(64) DEFAULT NULL
 );
 
 INSERT INTO version (table_name, table_version) values ('carrier_name','1');
 
 CREATE TABLE domain_name (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     domain VARCHAR(64) DEFAULT NULL
 );
 

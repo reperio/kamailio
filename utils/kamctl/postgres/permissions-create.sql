@@ -1,5 +1,5 @@
 CREATE TABLE trusted (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     src_ip VARCHAR(50) NOT NULL,
     proto VARCHAR(4) NOT NULL,
     from_pattern VARCHAR(64) DEFAULT NULL,
@@ -13,7 +13,7 @@ CREATE INDEX trusted_peer_idx ON trusted (src_ip);
 INSERT INTO version (table_name, table_version) values ('trusted','6');
 
 CREATE TABLE address (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     grp INTEGER DEFAULT 1 NOT NULL,
     ip_addr VARCHAR(50) NOT NULL,
     mask INTEGER DEFAULT 32 NOT NULL,

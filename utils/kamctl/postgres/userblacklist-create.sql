@@ -1,5 +1,5 @@
 CREATE TABLE userblacklist (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT '' NOT NULL,
     prefix VARCHAR(64) DEFAULT '' NOT NULL,
@@ -11,7 +11,7 @@ CREATE INDEX userblacklist_userblacklist_idx ON userblacklist (username, domain,
 INSERT INTO version (table_name, table_version) values ('userblacklist','1');
 
 CREATE TABLE globalblacklist (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     prefix VARCHAR(64) DEFAULT '' NOT NULL,
     whitelist SMALLINT DEFAULT 0 NOT NULL,
     description VARCHAR(255) DEFAULT NULL

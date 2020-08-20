@@ -1,5 +1,5 @@
 CREATE TABLE aliases (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     ruid VARCHAR(64) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT NULL,

@@ -1,5 +1,5 @@
 CREATE TABLE uid_user_attrs (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     uid VARCHAR(64) NOT NULL,
     name VARCHAR(32) NOT NULL,
     value VARCHAR(128),

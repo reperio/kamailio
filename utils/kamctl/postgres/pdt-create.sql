@@ -1,5 +1,5 @@
 CREATE TABLE pdt (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     sdomain VARCHAR(255) NOT NULL,
     prefix VARCHAR(32) NOT NULL,
     domain VARCHAR(255) DEFAULT '' NOT NULL,

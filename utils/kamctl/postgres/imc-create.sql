@@ -1,5 +1,5 @@
 CREATE TABLE imc_rooms (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     name VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     flag INTEGER NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE imc_rooms (
 INSERT INTO version (table_name, table_version) values ('imc_rooms','1');
 
 CREATE TABLE imc_members (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     room VARCHAR(64) NOT NULL,

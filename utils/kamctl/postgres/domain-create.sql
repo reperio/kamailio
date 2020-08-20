@@ -1,5 +1,5 @@
 CREATE TABLE domain (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     domain VARCHAR(64) NOT NULL,
     did VARCHAR(64) DEFAULT NULL,
     last_modified TIMESTAMP WITHOUT TIME ZONE DEFAULT '2000-01-01 00:00:01' NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE domain (
 INSERT INTO version (table_name, table_version) values ('domain','2');
 
 CREATE TABLE domain_attrs (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
     did VARCHAR(64) NOT NULL,
     name VARCHAR(32) NOT NULL,
     type INTEGER NOT NULL,
