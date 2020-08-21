@@ -1,5 +1,7 @@
+CREATE SEQUENCE dialog_id_seq;
+
 CREATE TABLE dialog (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('dialog_id_seq'),
     hash_entry INTEGER NOT NULL,
     hash_id INTEGER NOT NULL,
     callid VARCHAR(255) NOT NULL,
@@ -25,17 +27,23 @@ CREATE TABLE dialog (
     xdata VARCHAR(512)
 );
 
+ALTER SEQUENCE dialog_id_seq OWNED BY dialog.id;
+
 CREATE INDEX dialog_hash_idx ON dialog (hash_entry, hash_id);
 
 INSERT INTO version (table_name, table_version) values ('dialog','7');
 
+CREATE SEQUENCE dialog_vars_id_seq;
+
 CREATE TABLE dialog_vars (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('dialog_vars_id_seq'),
     hash_entry INTEGER NOT NULL,
     hash_id INTEGER NOT NULL,
     dialog_key VARCHAR(128) NOT NULL,
     dialog_value VARCHAR(512) NOT NULL
 );
+
+ALTER SEQUENCE dialog_vars_id_seq OWNED BY dialog_vars.id;
 
 CREATE INDEX dialog_vars_hash_idx ON dialog_vars (hash_entry, hash_id);
 
