@@ -145,10 +145,10 @@ if [ $? -ne 0 ] ; then
 fi
 
 for TABLE in $STANDARD_TABLES; do
-	sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE $TABLE TO $DBRWUSER;"
+	sql_query "$1" "GRANT ALL ON TABLE $TABLE TO $DBRWUSER;"
 	sql_query "$1" "GRANT SELECT ON TABLE $TABLE TO $DBROUSER;"
 	if [ $TABLE != "version" ] ; then
-		sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE "$TABLE"_id_seq TO $DBRWUSER;"
+		sql_query "$1" "GRANT ALL ON TABLE "$TABLE"_id_seq TO $DBRWUSER;"
     	sql_query "$1" "GRANT SELECT ON TABLE "$TABLE"_id_seq TO $DBROUSER;"
 	fi
 
@@ -206,9 +206,9 @@ if [ $? -ne 0 ] ; then
 fi
 
 for TABLE in $PRESENCE_TABLES; do
-	sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE $TABLE TO $DBRWUSER;"
+	sql_query "$1" "GRANT ALL ON TABLE $TABLE TO $DBRWUSER;"
 	sql_query "$1" "GRANT SELECT ON TABLE $TABLE TO $DBROUSER;"
-	sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE "$TABLE"_id_seq TO $DBRWUSER;"
+	sql_query "$1" "GRANT ALL ON TABLE "$TABLE"_id_seq TO $DBRWUSER;"
     sql_query "$1" "GRANT SELECT ON TABLE "$TABLE"_id_seq TO $DBROUSER;"
 	if [ $? -ne 0 ] ; then
 		merr "Grant privileges to presence tables failed!"
@@ -239,10 +239,10 @@ for TABLE in $EXTRA_MODULES; do
 done
 
 for TABLE in $EXTRA_TABLES; do
-	sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE $TABLE TO $DBRWUSER;"
+	sql_query "$1" "GRANT ALL ON TABLE $TABLE TO $DBRWUSER;"
 	sql_query "$1" "GRANT SELECT ON TABLE $TABLE TO $DBROUSER;"
 	if [ $TABLE != "route_tree" ] && [ $TABLE != "dr_gateways" ] && [ $TABLE != "dr_rules" ] ; then
-		sql_query "$1" "GRANT ALL PRIVILEGES ON TABLE "$TABLE"_id_seq TO $DBRWUSER;"
+		sql_query "$1" "GRANT ALL ON TABLE "$TABLE"_id_seq TO $DBRWUSER;"
 		sql_query "$1" "GRANT SELECT ON TABLE "$TABLE"_id_seq TO $DBROUSER;"
 	fi
 	if [ $? -ne 0 ] ; then
