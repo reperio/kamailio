@@ -1,5 +1,7 @@
+CREATE SEQUENCE location_id_seq;
+
 CREATE TABLE location (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('location_id_seq'),
     ruid VARCHAR(64) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT NULL,
@@ -25,14 +27,18 @@ CREATE TABLE location (
     CONSTRAINT location_ruid_idx UNIQUE (ruid)
 );
 
+ALTER SEQUENCE location_id_seq OWNED BY location.id;
+
 CREATE INDEX location_account_contact_idx ON location (username, domain, contact);
 CREATE INDEX location_expires_idx ON location (expires);
 CREATE INDEX location_connection_idx ON location (server_id, connection_id);
 
 INSERT INTO version (table_name, table_version) values ('location','9');
 
+CREATE SEQUENCE location_attrs_id_seq;
+
 CREATE TABLE location_attrs (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('location_attrs_id_seq'),
     ruid VARCHAR(64) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT NULL,
@@ -41,6 +47,8 @@ CREATE TABLE location_attrs (
     avalue VARCHAR(512) DEFAULT '' NOT NULL,
     last_modified TIMESTAMP WITHOUT TIME ZONE DEFAULT '2000-01-01 00:00:01' NOT NULL
 );
+
+ALTER SEQUENCE location_attrs_id_seq OWNED BY location_attrs.id;
 
 CREATE INDEX location_attrs_account_record_idx ON location_attrs (username, domain, ruid);
 CREATE INDEX location_attrs_last_modified_idx ON location_attrs (last_modified);
