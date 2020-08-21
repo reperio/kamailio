@@ -1,5 +1,7 @@
+CREATE SEQUENCE uid_credentials_id_seq;
+
 CREATE TABLE uid_credentials (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('uid_credentials_id_seq'),
     auth_username VARCHAR(64) NOT NULL,
     did VARCHAR(64) DEFAULT '_default' NOT NULL,
     realm VARCHAR(64) NOT NULL,
@@ -9,6 +11,8 @@ CREATE TABLE uid_credentials (
     ha1b VARCHAR(32) DEFAULT '' NOT NULL,
     uid VARCHAR(64) NOT NULL
 );
+
+ALTER SEQUENCE uid_credentials_id_seq OWNED BY uid_credentials.id;
 
 CREATE INDEX uid_credentials_cred_idx ON uid_credentials (auth_username, did);
 CREATE INDEX uid_credentials_uid ON uid_credentials (uid);
