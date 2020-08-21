@@ -1,7 +1,7 @@
 CREATE SEQUENCE dr_gateway_id_seq;
 
 CREATE TABLE dr_gateways (
-    gwid integer PRIMARY KEY NOT NULL DEFAULT nextval('subscriber_id_seq'),
+    gwid integer PRIMARY KEY NOT NULL DEFAULT nextval('dr_gateways_id_seq'),
     type INTEGER DEFAULT 0 NOT NULL,
     address VARCHAR(128) NOT NULL,
     strip INTEGER DEFAULT 0 NOT NULL,
@@ -17,7 +17,7 @@ INSERT INTO version (table_name, table_version) values ('dr_gateways','3');
 CREATE SEQUENCE dr_rules_id_seq;
 
 CREATE TABLE dr_rules (
-    ruleid integer PRIMARY KEY NOT NULL DEFAULT nextval('subscriber_id_seq'),
+    ruleid integer PRIMARY KEY NOT NULL DEFAULT nextval('dr_rules_id_seq'),
     groupid VARCHAR(255) NOT NULL,
     prefix VARCHAR(64) NOT NULL,
     timerec VARCHAR(255) NOT NULL,
@@ -34,7 +34,7 @@ INSERT INTO version (table_name, table_version) values ('dr_rules','3');
 CREATE SEQUENCE dr_gw_lists_id_seq;
 
 CREATE TABLE dr_gw_lists (
-    id integer PRIMARY KEY NOT NULL DEFAULT nextval('subscriber_id_seq'),
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('dr_gw_lists_id_seq'),
     gwlist VARCHAR(255) NOT NULL,
     description VARCHAR(128) DEFAULT '' NOT NULL
 );
@@ -46,7 +46,7 @@ INSERT INTO version (table_name, table_version) values ('dr_gw_lists','1');
 CREATE SEQUENCE dr_groups_id_seq;
 
 CREATE TABLE dr_groups (
-    id integer PRIMARY KEY NOT NULL DEFAULT nextval('subscriber_id_seq'),
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('dr_groups_id_seq'),
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(128) DEFAULT '' NOT NULL,
     groupid INTEGER DEFAULT 0 NOT NULL,

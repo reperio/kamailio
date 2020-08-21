@@ -1,4 +1,4 @@
-CREATE SEQUENCE subscriber_id_seq;
+CREATE SEQUENCE rls_presentity_id_seq;
 
 CREATE TABLE rls_presentity (
     id integer PRIMARY KEY NOT NULL DEFAULT nextval('rls_presentity_id_seq'),
@@ -21,7 +21,7 @@ CREATE INDEX rls_presentity_expires_idx ON rls_presentity (expires);
 
 INSERT INTO version (table_name, table_version) values ('rls_presentity','1');
 
-CREATE SEQUENCE subscriber_id_seq;
+CREATE SEQUENCE rls_watchers_id_seq;
 
 CREATE TABLE rls_watchers (
     id integer PRIMARY KEY NOT NULL DEFAULT nextval('rls_watchers_id_seq'),
