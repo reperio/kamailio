@@ -1,5 +1,7 @@
+CREATE SEQUENCE silo_id_seq;
+
 CREATE TABLE silo (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('silo_id_seq'),
     src_addr VARCHAR(255) DEFAULT '' NOT NULL,
     dst_addr VARCHAR(255) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
@@ -13,6 +15,8 @@ CREATE TABLE silo (
     callid VARCHAR(128) DEFAULT '' NOT NULL,
     status INTEGER DEFAULT 0 NOT NULL
 );
+
+ALTER SEQUENCE silo_id_seq OWNED BY silo.id;
 
 CREATE INDEX silo_account_idx ON silo (username, domain);
 
