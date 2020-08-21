@@ -1,5 +1,7 @@
+CREATE SEQUENCE lcr_gw_id_seq;
+
 CREATE TABLE lcr_gw (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('lcr_gw_id_seq'),
     lcr_id SMALLINT NOT NULL,
     gw_name VARCHAR(128),
     ip_addr VARCHAR(50),
@@ -15,12 +17,16 @@ CREATE TABLE lcr_gw (
     defunct INTEGER DEFAULT NULL
 );
 
+ALTER SEQUENCE lcr_gw_id_seq OWNED BY lcr_gw.id;
+
 CREATE INDEX lcr_gw_lcr_id_idx ON lcr_gw (lcr_id);
 
 INSERT INTO version (table_name, table_version) values ('lcr_gw','3');
 
+CREATE SEQUENCE lcr_rule_target_id_seq;
+
 CREATE TABLE lcr_rule_target (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('lcr_rule_target_id_seq'),
     lcr_id SMALLINT NOT NULL,
     rule_id INTEGER NOT NULL,
     gw_id INTEGER NOT NULL,
@@ -29,12 +35,16 @@ CREATE TABLE lcr_rule_target (
     CONSTRAINT lcr_rule_target_rule_id_gw_id_idx UNIQUE (rule_id, gw_id)
 );
 
+ALTER SEQUENCE lcr_rule_target_id_seq OWNED BY lcr_rule_target.id;
+
 CREATE INDEX lcr_rule_target_lcr_id_idx ON lcr_rule_target (lcr_id);
 
 INSERT INTO version (table_name, table_version) values ('lcr_rule_target','1');
 
+CREATE SEQUENCE lcr_rule_id_seq;
+
 CREATE TABLE lcr_rule (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('lcr_rule_id_seq'),
     lcr_id SMALLINT NOT NULL,
     prefix VARCHAR(16) DEFAULT NULL,
     from_uri VARCHAR(64) DEFAULT NULL,
@@ -44,6 +54,8 @@ CREATE TABLE lcr_rule (
     enabled INTEGER DEFAULT 1 NOT NULL,
     CONSTRAINT lcr_rule_lcr_id_prefix_from_uri_idx UNIQUE (lcr_id, prefix, from_uri)
 );
+
+ALTER SEQUENCE lcr_rule_id_seq OWNED BY lcr_rule.id;
 
 INSERT INTO version (table_name, table_version) values ('lcr_rule','3');
 
