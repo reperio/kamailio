@@ -1,5 +1,7 @@
+CREATE SEQUENCE aliases_id_seq;
+
 CREATE TABLE aliases (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('aliases_id_seq'),
     ruid VARCHAR(64) DEFAULT '' NOT NULL,
     username VARCHAR(64) DEFAULT '' NOT NULL,
     domain VARCHAR(64) DEFAULT NULL,
@@ -24,6 +26,8 @@ CREATE TABLE aliases (
     partition INTEGER DEFAULT 0 NOT NULL,
     CONSTRAINT aliases_ruid_idx UNIQUE (ruid)
 );
+
+ALTER SEQUENCE aliases_id_seq OWNED BY aliases.id;
 
 CREATE INDEX aliases_account_contact_idx ON aliases (username, domain, contact);
 CREATE INDEX aliases_expires_idx ON aliases (expires);
