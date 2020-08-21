@@ -1,5 +1,7 @@
+CREATE SEQUENCE presentity_id_seq;
+
 CREATE TABLE presentity (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('presentity_id_seq')
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     event VARCHAR(64) NOT NULL,
@@ -14,13 +16,17 @@ CREATE TABLE presentity (
     CONSTRAINT presentity_ruid_idx UNIQUE (ruid)
 );
 
+ALTER SEQUENCE presentity_id_seq OWNED BY presentity.id;
+
 CREATE INDEX presentity_presentity_expires ON presentity (expires);
 CREATE INDEX presentity_account_idx ON presentity (username, domain, event);
 
 INSERT INTO version (table_name, table_version) values ('presentity','5');
 
+CREATE SEQUENCE active_watchers_id_seq;
+
 CREATE TABLE active_watchers (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('active_watchers_id_seq')
     presentity_uri VARCHAR(255) NOT NULL,
     watcher_username VARCHAR(64) NOT NULL,
     watcher_domain VARCHAR(64) NOT NULL,
@@ -50,6 +56,8 @@ CREATE TABLE active_watchers (
     CONSTRAINT active_watchers_active_watchers_idx UNIQUE (callid, to_tag, from_tag)
 );
 
+ALTER SEQUENCE active_watchers_id_seq OWNED BY active_watchers.id;
+
 CREATE INDEX active_watchers_active_watchers_expires ON active_watchers (expires);
 CREATE INDEX active_watchers_active_watchers_pres ON active_watchers (presentity_uri, event);
 CREATE INDEX active_watchers_updated_idx ON active_watchers (updated);
@@ -57,8 +65,10 @@ CREATE INDEX active_watchers_updated_winfo_idx ON active_watchers (updated_winfo
 
 INSERT INTO version (table_name, table_version) values ('active_watchers','12');
 
+CREATE SEQUENCE watchers_id_seq;
+
 CREATE TABLE watchers (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('watchers_id_seq')
     presentity_uri VARCHAR(255) NOT NULL,
     watcher_username VARCHAR(64) NOT NULL,
     watcher_domain VARCHAR(64) NOT NULL,
@@ -69,10 +79,14 @@ CREATE TABLE watchers (
     CONSTRAINT watchers_watcher_idx UNIQUE (presentity_uri, watcher_username, watcher_domain, event)
 );
 
+ALTER SEQUENCE watchers_id_seq OWNED BY watchers.id;
+
 INSERT INTO version (table_name, table_version) values ('watchers','3');
 
+CREATE SEQUENCE xcap_id_seq;
+
 CREATE TABLE xcap (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('xcap_id_seq')
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     doc BYTEA NOT NULL,
@@ -84,14 +98,18 @@ CREATE TABLE xcap (
     CONSTRAINT xcap_doc_uri_idx UNIQUE (doc_uri)
 );
 
+ALTER SEQUENCE xcap_id_seq OWNED BY xcap.id;
+
 CREATE INDEX xcap_account_doc_type_idx ON xcap (username, domain, doc_type);
 CREATE INDEX xcap_account_doc_type_uri_idx ON xcap (username, domain, doc_type, doc_uri);
 CREATE INDEX xcap_account_doc_uri_idx ON xcap (username, domain, doc_uri);
 
 INSERT INTO version (table_name, table_version) values ('xcap','4');
 
+CREATE SEQUENCE pua_id_seq;
+
 CREATE TABLE pua (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('pua_id_seq')
     pres_uri VARCHAR(255) NOT NULL,
     pres_id VARCHAR(255) NOT NULL,
     event INTEGER NOT NULL,
@@ -112,6 +130,8 @@ CREATE TABLE pua (
     extra_headers TEXT NOT NULL,
     CONSTRAINT pua_pua_idx UNIQUE (etag, tuple_id, call_id, from_tag)
 );
+
+ALTER SEQUENCE pua_id_seq OWNED BY pua.id;
 
 CREATE INDEX pua_expires_idx ON pua (expires);
 CREATE INDEX pua_dialog1_idx ON pua (pres_id, pres_uri);
