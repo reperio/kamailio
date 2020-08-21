@@ -1,4 +1,4 @@
-CREATE SEQUENCE sca_subscriptions;
+CREATE SEQUENCE sca_subscriptions_id_seq;
 
 CREATE TABLE sca_subscriptions (
     id integer PRIMARY KEY NOT NULL DEFAULT nextval('sca_subscriptions_id_seq'),

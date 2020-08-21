@@ -38,10 +38,14 @@ ALTER SEQUENCE carrierfailureroute_id_seq OWNED BY carrierfailureroute.id;
 
 INSERT INTO version (table_name, table_version) values ('carrierfailureroute','2');
 
+CREATE SEQUENCE carrier_namee_id_seq;
+
 CREATE TABLE carrier_name (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('carrier_name_id_seq'),
     carrier VARCHAR(64) DEFAULT NULL
 );
+
+ALTER SEQUENCE carrier_name_id_seq OWNED BY carrier_name.id;
 
 INSERT INTO version (table_name, table_version) values ('carrier_name','1');
 

@@ -1,4 +1,4 @@
-CREATE SEQUENCE dr_gateway_id_seq;
+CREATE SEQUENCE dr_gateways_id_seq;
 
 CREATE TABLE dr_gateways (
     gwid integer PRIMARY KEY NOT NULL DEFAULT nextval('dr_gateways_id_seq'),
@@ -53,7 +53,7 @@ CREATE TABLE dr_groups (
     description VARCHAR(128) DEFAULT '' NOT NULL
 );
 
-ALTER SEQUENCE dr_groups_seq OWNED BY dr_groups.id;
+ALTER SEQUENCE dr_groups_id_seq OWNED BY dr_groups.id;
 
 INSERT INTO version (table_name, table_version) values ('dr_groups','2');
 
