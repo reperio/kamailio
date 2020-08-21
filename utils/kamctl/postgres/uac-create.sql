@@ -1,5 +1,7 @@
+CREATE SEQUENCE uacreg_id_seq;
+
 CREATE TABLE uacreg (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('uacreg_id_seq'),
     l_uuid VARCHAR(64) DEFAULT '' NOT NULL,
     l_username VARCHAR(64) DEFAULT '' NOT NULL,
     l_domain VARCHAR(64) DEFAULT '' NOT NULL,
@@ -16,6 +18,8 @@ CREATE TABLE uacreg (
     socket VARCHAR(128) DEFAULT '' NOT NULL,
     CONSTRAINT uacreg_l_uuid_idx UNIQUE (l_uuid)
 );
+
+ALTER SEQUENCE uacreg_id_seq OWNED BY uacreg.id;
 
 INSERT INTO version (table_name, table_version) values ('uacreg','4');
 
