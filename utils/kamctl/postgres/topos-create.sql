@@ -1,5 +1,7 @@
+CREATE SEQUENCE topos_d_id_seq;
+
 CREATE TABLE topos_d (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('topos_d_id_seq'),
     rectime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     s_method VARCHAR(64) DEFAULT '' NOT NULL,
     s_cseq VARCHAR(64) DEFAULT '' NOT NULL,
@@ -25,6 +27,8 @@ CREATE TABLE topos_d (
     b_socket VARCHAR(128) DEFAULT '' NOT NULL
 );
 
+ALTER SEQUENCE topos_d_id_seq OWNED BY topos_d.id;
+
 CREATE INDEX topos_d_rectime_idx ON topos_d (rectime);
 CREATE INDEX topos_d_a_callid_idx ON topos_d (a_callid);
 CREATE INDEX topos_d_a_uuid_idx ON topos_d (a_uuid);
@@ -32,8 +36,10 @@ CREATE INDEX topos_d_b_uuid_idx ON topos_d (b_uuid);
 
 INSERT INTO version (table_name, table_version) values ('topos_d','1');
 
+CREATE SEQUENCE topos_t_id_seq;
+
 CREATE TABLE topos_t (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('topos_t_id_seq'),
     rectime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     s_method VARCHAR(64) DEFAULT '' NOT NULL,
     s_cseq VARCHAR(64) DEFAULT '' NOT NULL,
@@ -59,6 +65,8 @@ CREATE TABLE topos_t (
     a_socket VARCHAR(128) DEFAULT '' NOT NULL,
     b_socket VARCHAR(128) DEFAULT '' NOT NULL
 );
+
+ALTER SEQUENCE topos_t_id_seq OWNED BY topos_t.id;
 
 CREATE INDEX topos_t_rectime_idx ON topos_t (rectime);
 CREATE INDEX topos_t_a_callid_idx ON topos_t (a_callid);
