@@ -52,10 +52,10 @@ if [ -z "$DBROOTUSER" ]; then
 fi
 
 if [ -z "$DBPORT" ] ; then
-	CMD="psql -q -h $DBHOST -U $DBROOTUSER "
+	CMD="psql -A -q -t -h $DBHOST -U $DBROOTUSER "
 	DUMP_CMD="pg_dump -h $DBHOST -U $DBROOTUSER -c"
 else
-	CMD="psql -q -h $DBHOST -p $DBPORT -U $DBROOTUSER "
+	CMD="psql -A -q -t -h $DBHOST -p $DBPORT -U $DBROOTUSER "
 	DUMP_CMD="pg_dump -h $DBHOST -p $DBPORT -U $DBROOTUSER -c"
 fi
 
@@ -120,14 +120,28 @@ if [ $? -ne 0 ] ; then
 	exit 1
 fi
 
-sql_query "$1" "CREATE FUNCTION "concat" (text,text) RETURNS text AS 'SELECT \$1 || \$2;' LANGUAGE 'sql';
-	        CREATE FUNCTION "rand" () RETURNS double precision AS 'SELECT random();' LANGUAGE 'sql';"
-# emulate mysql proprietary functions used by the lcr module in postgresql
 
-if [ $? -ne 0 ] ; then
-	merr "Creating mysql emulation functions failed!"
-	exit 1
+minfo "Checking for concat() function..."
+if test `sql_query "postgres" "select exists(select * from pg_proc where proname = 'concat');"` = "f"; then
+        minfo "Creating missing concat() function"
+        sql_query "$1" "CREATE FUNCTION "concat" (text,text) RETURNS text AS 'SELECT \$1 || \$2;' LANGUAGE 'sql';"
+        if [ $? -ne 0 ] ; then
+                merr "Creating mysql emulation functions failed!"
+                exit 1
+        fi
 fi
+
+minfo "Checking for rand() function..."
+if test `sql_query "postgres" "select exists(select * from pg_proc where proname = 'rand');"` = "f"; then
+        minfo "Creating missing rand() function"
+        sql_query "$1" "CREATE FUNCTION "rand" () RETURNS double precision AS 'SELECT random();' LANGUAGE 'sql';"
+        if [ $? -ne 0 ] ; then
+                merr "Creating mysql emulation functions failed!"
+                exit 1
+        fi
+fi
+
+# emulate mysql proprietary functions used by the lcr module in postgresql
 
 for TABLE in $STANDARD_MODULES; do
     mdbg "Creating core table: $TABLE"
