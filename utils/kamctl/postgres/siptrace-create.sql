@@ -1,5 +1,7 @@
+CREATE SEQUENCE sip_trace_id_seq;
+
 CREATE TABLE sip_trace (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('sip_trace_id_seq'),
     time_stamp TIMESTAMP WITHOUT TIME ZONE DEFAULT '2000-01-01 00:00:01' NOT NULL,
     time_us INTEGER DEFAULT 0 NOT NULL,
     callid VARCHAR(255) DEFAULT '' NOT NULL,
@@ -13,6 +15,8 @@ CREATE TABLE sip_trace (
     totag VARCHAR(128) DEFAULT '' NOT NULL,
     direction VARCHAR(4) DEFAULT '' NOT NULL
 );
+
+ALTER SEQUENCE sip_trace_id_seq OWNED BY sip_trace.id;
 
 CREATE INDEX sip_trace_traced_user_idx ON sip_trace (traced_user);
 CREATE INDEX sip_trace_date_idx ON sip_trace (time_stamp);
