@@ -1,5 +1,7 @@
+CREATE SEQUENCE subscriber_id_seq;
+
 CREATE TABLE rls_presentity (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('rls_presentity_id_seq'),
     rlsubs_did VARCHAR(255) NOT NULL,
     resource_uri VARCHAR(255) NOT NULL,
     content_type VARCHAR(255) NOT NULL,
@@ -11,14 +13,18 @@ CREATE TABLE rls_presentity (
     CONSTRAINT rls_presentity_rls_presentity_idx UNIQUE (rlsubs_did, resource_uri)
 );
 
+ALTER SEQUENCE rls_presentity_id_seq OWNED BY rls_presentity.id;
+
 CREATE INDEX rls_presentity_rlsubs_idx ON rls_presentity (rlsubs_did);
 CREATE INDEX rls_presentity_updated_idx ON rls_presentity (updated);
 CREATE INDEX rls_presentity_expires_idx ON rls_presentity (expires);
 
 INSERT INTO version (table_name, table_version) values ('rls_presentity','1');
 
+CREATE SEQUENCE subscriber_id_seq;
+
 CREATE TABLE rls_watchers (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('rls_watchers_id_seq'),
     presentity_uri VARCHAR(255) NOT NULL,
     to_user VARCHAR(64) NOT NULL,
     to_domain VARCHAR(64) NOT NULL,
@@ -44,6 +50,8 @@ CREATE TABLE rls_watchers (
     updated INTEGER NOT NULL,
     CONSTRAINT rls_watchers_rls_watcher_idx UNIQUE (callid, to_tag, from_tag)
 );
+
+ALTER SEQUENCE rls_watchers_id_seq OWNED BY rls_watchers.id;
 
 CREATE INDEX rls_watchers_rls_watchers_update ON rls_watchers (watcher_username, watcher_domain, event);
 CREATE INDEX rls_watchers_rls_watchers_expires ON rls_watchers (expires);
