@@ -1,5 +1,7 @@
+CREATE SEQUENCE dialplan_id_seq;
+
 CREATE TABLE dialplan (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('dialplan_id_seq'),
     dpid INTEGER NOT NULL,
     pr INTEGER NOT NULL,
     match_op INTEGER NOT NULL,
@@ -9,6 +11,8 @@ CREATE TABLE dialplan (
     repl_exp VARCHAR(256) NOT NULL,
     attrs VARCHAR(64) NOT NULL
 );
+
+ALTER SEQUENCE dialplan_id_seq OWNED BY dialplan.id;
 
 INSERT INTO version (table_name, table_version) values ('dialplan','2');
 
