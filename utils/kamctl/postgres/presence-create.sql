@@ -1,7 +1,7 @@
 CREATE SEQUENCE presentity_id_seq;
 
 CREATE TABLE presentity (
-    id integer PRIMARY KEY NOT NULL DEFAULT nextval('presentity_id_seq')
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('presentity_id_seq'),
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     event VARCHAR(64) NOT NULL,
@@ -26,7 +26,7 @@ INSERT INTO version (table_name, table_version) values ('presentity','5');
 CREATE SEQUENCE active_watchers_id_seq;
 
 CREATE TABLE active_watchers (
-    id integer PRIMARY KEY NOT NULL DEFAULT nextval('active_watchers_id_seq')
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('active_watchers_id_seq'),
     presentity_uri VARCHAR(255) NOT NULL,
     watcher_username VARCHAR(64) NOT NULL,
     watcher_domain VARCHAR(64) NOT NULL,
@@ -68,7 +68,7 @@ INSERT INTO version (table_name, table_version) values ('active_watchers','12');
 CREATE SEQUENCE watchers_id_seq;
 
 CREATE TABLE watchers (
-    id integer PRIMARY KEY NOT NULL DEFAULT nextval('watchers_id_seq')
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('watchers_id_seq'),
     presentity_uri VARCHAR(255) NOT NULL,
     watcher_username VARCHAR(64) NOT NULL,
     watcher_domain VARCHAR(64) NOT NULL,
@@ -86,7 +86,7 @@ INSERT INTO version (table_name, table_version) values ('watchers','3');
 CREATE SEQUENCE xcap_id_seq;
 
 CREATE TABLE xcap (
-    id integer PRIMARY KEY NOT NULL DEFAULT nextval('xcap_id_seq')
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('xcap_id_seq'),
     username VARCHAR(64) NOT NULL,
     domain VARCHAR(64) NOT NULL,
     doc BYTEA NOT NULL,
@@ -109,7 +109,7 @@ INSERT INTO version (table_name, table_version) values ('xcap','4');
 CREATE SEQUENCE pua_id_seq;
 
 CREATE TABLE pua (
-    id integer PRIMARY KEY NOT NULL DEFAULT nextval('pua_id_seq')
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('pua_id_seq'),
     pres_uri VARCHAR(255) NOT NULL,
     pres_id VARCHAR(255) NOT NULL,
     event INTEGER NOT NULL,
