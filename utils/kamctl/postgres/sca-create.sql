@@ -1,5 +1,7 @@
+CREATE SEQUENCE sca_subscriptions;
+
 CREATE TABLE sca_subscriptions (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id integer PRIMARY KEY NOT NULL DEFAULT nextval('sca_subscriptions_id_seq'),
     subscriber VARCHAR(255) NOT NULL,
     aor VARCHAR(255) NOT NULL,
     event INTEGER DEFAULT 0 NOT NULL,
@@ -15,6 +17,8 @@ CREATE TABLE sca_subscriptions (
     server_id INTEGER DEFAULT 0 NOT NULL,
     CONSTRAINT sca_subscriptions_sca_subscriptions_idx UNIQUE (subscriber, call_id, from_tag, to_tag)
 );
+
+ALTER SEQUENCE sca_subscriptions_id_seq OWNED BY sca_subscriptions.id;
 
 CREATE INDEX sca_subscriptions_sca_expires_idx ON sca_subscriptions (server_id, expires);
 CREATE INDEX sca_subscriptions_sca_subscribers_idx ON sca_subscriptions (subscriber, event);
