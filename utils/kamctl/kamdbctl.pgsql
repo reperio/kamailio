@@ -121,18 +121,18 @@ if [ $? -ne 0 ] ; then
 fi
 
 minfo "Checking for gen_random_uuid() function..."
-if test `sql_query "postgres" "select exists(select * from pg_proc where proname = 'gen_random_uuid');"` = "f"; then
+if test `sql_query "$1" "select exists(select * from pg_proc where proname = 'gen_random_uuid');"` = "f"; then
         minfo "Add pgcrypto for missing gen_random_uuid() function"
         sql_query "$1" "CREATE EXTENSION pgcrypto;"
         if [ $? -ne 0 ] ; then
-                merr "Creating mysql emulation functions failed!"
+                merr "Adding pgcrypto extension failed!"
                 exit 1
         fi
 fi
 
 
 minfo "Checking for concat() function..."
-if test `sql_query "postgres" "select exists(select * from pg_proc where proname = 'concat');"` = "f"; then
+if test `sql_query "$1" "select exists(select * from pg_proc where proname = 'concat');"` = "f"; then
         minfo "Creating missing concat() function"
         sql_query "$1" "CREATE FUNCTION "concat" (text,text) RETURNS text AS 'SELECT \$1 || \$2;' LANGUAGE 'sql';"
         if [ $? -ne 0 ] ; then
@@ -142,7 +142,7 @@ if test `sql_query "postgres" "select exists(select * from pg_proc where proname
 fi
 
 minfo "Checking for rand() function..."
-if test `sql_query "postgres" "select exists(select * from pg_proc where proname = 'rand');"` = "f"; then
+if test `sql_query "$1" "select exists(select * from pg_proc where proname = 'rand');"` = "f"; then
         minfo "Creating missing rand() function"
         sql_query "$1" "CREATE FUNCTION "rand" () RETURNS double precision AS 'SELECT random();' LANGUAGE 'sql';"
         if [ $? -ne 0 ] ; then
