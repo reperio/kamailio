@@ -120,6 +120,16 @@ if [ $? -ne 0 ] ; then
 	exit 1
 fi
 
+minfo "Checking for gen_random_uuid() function..."
+if test `sql_query "postgres" "select exists(select * from pg_proc where proname = 'gen_random_uuid');"` = "f"; then
+        minfo "Add pgcrypto for missing gen_random_uuid() function"
+        sql_query "$1" "CREATE EXTENSION pgcrypto;"
+        if [ $? -ne 0 ] ; then
+                merr "Creating mysql emulation functions failed!"
+                exit 1
+        fi
+fi
+
 
 minfo "Checking for concat() function..."
 if test `sql_query "postgres" "select exists(select * from pg_proc where proname = 'concat');"` = "f"; then
